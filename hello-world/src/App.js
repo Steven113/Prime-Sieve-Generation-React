@@ -2,53 +2,78 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-class Clock extends Component {
+import Clock from './Clock.js';
+
+var dataArray = [];
+
+var start = 1;
+var end = 95;
+
+for (let i = start; i<end; ++i){
+    dataArray.push(i);
+}
+
+var intList = dataArray.map(
+    (number) => {
+        //key is used to track changes to item
+        return <td key={number.toString()}>{number}</td>
+    }
+);
+
+class TableRow extends Component {
     constructor(props){
         super(props);
-        this.state = {date: new Date()};
 
-        this.updateTimeEvent = this.updateTimeEvent.bind(this);
+        this.state = {
+            rowDataArray : props.rowDataArray
+        };
     }
 
-    //lifecycle hook - called when component is rendered to DOM
-    componentDidMount(){
-        this.timerID = setInterval(
-            () => this.updateTime(),
-            1000
-        );
-    }
-
-    //lifecyce hook - used when component is destroyed
-    componentWillUnmount(){
-        clearInterval(this.timerID);
-    }
-
-    updateTime(){
-        this.setState({
-            date: new Date()
+    render(){
+        var rowDataList = this.state.rowDataArray.map(function(item){
+            return <td>{item}</td>
         });
+
+        return <tr>{rowDataList}</tr>
+    }
+}
+
+class TableRenderer extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            dataArray : props.dataArray,
+            rowWidth : props.rowWidth
+        };
     }
 
-    updateTimeEvent(e){
-        e.preventDefault();
-        this.updateTime();
-    }
+    render() {
+        var dataArray = this.state.dataArray;
+        var rowWidth = this.state.rowWidth;
 
-    render () {
+        var rowArray = [];
+        var n = 0;
+        for (; (n+1)*rowWidth < dataArray.length; ++n){
+            rowArray.push(dataArray.slice((n)*rowWidth,(n+1)*rowWidth));
+        }
+        rowArray.push(dataArray.slice(n*rowWidth, dataArray.length));
+
+        var rowHTMLList = rowArray.map(function(rowData){
+            return <TableRow rowDataArray={rowData}/>;
+        });
+
         return (
-            <div>
-                <h1> Hello world </h1>
-                <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-            </div>
+            <table>
+                {rowHTMLList}
+            </table>
         );
     }
 }
 
 class App extends Component {
   render() {
-    return (
-      <Clock />
-    );
+    return <TableRenderer dataArray={intList} rowWidth={10}/>
   }
 }
 
