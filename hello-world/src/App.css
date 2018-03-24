@@ -27,6 +27,14 @@
   to { transform: rotate(360deg); }
 }
 
-td:hover {
-    background-color : yellow;
+td.Unprocessed-Value {
+    background-color: grey;
+}
+
+td.Not-Prime {
+    background-color: red;
+}
+
+td.Is-Prime {
+    background-color: green;
 }
