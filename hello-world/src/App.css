@@ -1,3 +1,51 @@
+.optionsSection {
+    width : 400px;
+    height : 160px;
+    position : relative
+}
+
+.primeGenerationSpeedTextBoxStyle {
+    text-align: center;
+    vertical-align: middle;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width : 158px;
+    height : 40px;
+    border: 1px solid #000000
+}
+
+.increasePrimeGeneratorSpeedButtonStyle {
+    position: absolute;
+    top: 40px;
+    left: 0px;
+    width : 160px;
+    height : 40px;
+    border: 1px solid #000000
+}
+
+.decreasePrimeGeneratorSpeedButtonStyle {
+    position: absolute;
+    top: 80px;
+    left: 0px;
+    width : 160px;
+    height : 40px;
+    border: 1px solid #000000
+}
+
+.resetPrimeGeneratorSpeedButtonStyle {
+    position: absolute;
+    top: 120px;
+    left: 0px;
+    width : 160px;
+    height : 40px;
+    border: 1px solid #000000
+}
+
+table {
+    border: 5px solid black;
+}
+
 .App {
   text-align: center;
 }
