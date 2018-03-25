@@ -88,7 +88,8 @@ export class TableRenderer extends Component {
             keyExtractionFunction : props.keyExtractionFunction,
             tableName : props.tableName,
             noItemsFoundMessage : props.noItemsFoundMessage,
-            columnHeaderNames : props.columnHeaderNames
+            columnHeaderNames : props.columnHeaderNames,
+            tableClassName : props.tableClassName
         };
     }
 
@@ -122,6 +123,8 @@ export class TableRenderer extends Component {
         var noItemsFoundMessage = this.state.noItemsFoundMessage;
         var columnHeaderNames = this.state.columnHeaderNames;
 
+        var tableClassName = this.state.tableClassName;
+
         if (dataArray.length === 0){
             return <b>{noItemsFoundMessage}</b>
         }
@@ -148,7 +151,7 @@ export class TableRenderer extends Component {
         }
 
         return (
-            <table>
+            <table className={tableClassName}>
                 <tbody>
                     {rowArray}
                 </tbody>

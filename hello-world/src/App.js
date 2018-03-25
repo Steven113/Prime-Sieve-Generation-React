@@ -3,7 +3,6 @@ import './App.css';
 
 
 
-
 import {PrimeGenerator} from './PrimeGenerator.js';
 
 

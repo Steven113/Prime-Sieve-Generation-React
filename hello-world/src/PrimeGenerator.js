@@ -196,17 +196,26 @@ export class PrimeGenerator extends Component {
         //console.log(`primes ${JSON.stringify(primes)} ${primes.length}`);
 
         return (
-            <div>
-                <h1> Prime Generator</h1>
-                <Clock/>
+            <primeGenerator>
+
+                <div className="primeGeneratorHeading">
+                    <h1> Prime Generator</h1>
+                    <Clock/>
+                </div>
+
                 <div className="user-options">
 
                 <section><PrimeUserOptions increaseTimerInterval={this.increaseTimerInterval} decreaseTimerInterval={this.decreaseTimerInterval} changeTimeInterval={this.changeTimeInterval} resetTimerInterval={this.resetTimerInterval} timerInterval={this.getTimerInterval()} primeTableLength={this.getPrimeTableLength()} increasePrimeTableLength={this.increasePrimeTableLength} decreasePrimeTableLength={this.decreasePrimeTableLength} resetPrimeGenerator={this.resetPrimeGenerator} setPrimeTableLength={this.setPrimeTableLength}/></section>
                  </div>
-                <section><TableRenderer dataArray={dataArray} tableName={visualizationTableName} key={visualizationTableName} rowWidth={rowWidth} noItemsFoundMessage={"No values"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction}/>
-                <h2> Primes found </h2>
-                <TableRenderer dataArray={primes} rowWidth={rowWidth} tableName={primeTableName} key={primeTableName} noItemsFoundMessage={"No primes found"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction}/></section>
-            </div>
+
+                <section>
+                    <tableSection>
+                        <TableRenderer dataArray={dataArray} tableName={visualizationTableName} key={visualizationTableName} rowWidth={rowWidth} noItemsFoundMessage={"No values"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction} tableClassName={"center"}/>
+                        <h2> Primes found </h2>
+                        <TableRenderer dataArray={primes} rowWidth={rowWidth} tableName={primeTableName} key={primeTableName} noItemsFoundMessage={"No primes found"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction} tableClassName={"center"}/>
+                    </tableSection>
+                </section>
+            </primeGenerator>
         );
     }
 
