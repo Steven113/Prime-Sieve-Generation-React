@@ -1,18 +1,26 @@
+section {
+    padding : 10px;
+}
+
 .optionsSection {
     width : 480px;
     height : 160px;
-    position : relative
+    position : relative;
+    border: 1px solid #000000;
+
 }
 
 .primeGenerationSpeedTextBox {
-    text-align: center;
-    vertical-align: middle;
     position: absolute;
     top: 0px;
     left: 0px;
     width : 158px;
     height : 40px;
-    border: 1px solid #000000
+    border: 1px solid #000000;
+
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
 }
 
 .increasePrimeGeneratorSpeedButton {
@@ -43,25 +51,29 @@
 }
 
 .primeGenerationLengthTextBox {
-    text-align: center;
-    vertical-align: middle;
     position: absolute;
     top: 0px;
     left: 160px;
     width : 158px;
     height : 40px;
-    border: 1px solid #000000
+    border: 1px solid #000000;
+
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
 }
 
 .primeGenerationLengthPromptBox {
-    text-align: center;
-    vertical-align: middle;
     position: absolute;
     top: 0px;
     left: 320px;
     width : 158px;
     height : 40px;
-    border: 1px solid #000000
+    border: 1px solid #000000;
+
+    text-align: center;
+    vertical-align: middle;
+    line-height: 20px;
 }
 
 .primeGenerationLengthInputBox {
