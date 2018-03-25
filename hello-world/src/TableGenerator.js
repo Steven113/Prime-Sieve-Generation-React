@@ -9,7 +9,8 @@ class TableItem extends Component {
         super(props);
 
         this.state = {
-            data : props.data,
+            dataArray : props.dataArray,
+            itemIndex : props.itemIndex,
             valueExtractionFunction : props.valueExtractionFunction,
             classExtractionFunction : props.classExtractionFunction
         };
@@ -21,32 +22,9 @@ class TableItem extends Component {
         var valueExtractionFunction = this.state.valueExtractionFunction;
         var classExtractionFunction = this.state.classExtractionFunction;
 
-        var data = this.state.data;
+        var data = this.state.dataArray[this.state.itemIndex];
 
         return <td className={classExtractionFunction(data)}>{valueExtractionFunction(data)}</td>
-    }
-}
-
-class TableHeader extends Component {
-    constructor(props){
-        super(props);
-
-        this.state = {
-            data : props.data,
-            valueExtractionFunction : props.valueExtractionFunction,
-            classExtractionFunction : props.classExtractionFunction
-        };
-    }
-
-    render(){
-        ++numItemRenders;
-
-        var valueExtractionFunction = this.state.valueExtractionFunction;
-        var classExtractionFunction = this.state.classExtractionFunction;
-
-        var data = this.state.data;
-
-        return <th className={classExtractionFunction(data)}>{valueExtractionFunction(data)}</th>
     }
 }
 
@@ -55,10 +33,12 @@ class TableRow extends Component {
         super(props);
 
         this.state = {
-            rowDataArray : props.rowDataArray,
+            dataArray : props.dataArray,
             valueExtractionFunction : props.valueExtractionFunction,
             classExtractionFunction : props.classExtractionFunction,
-            keyExtractionFunction : props.keyExtractionFunction
+            keyExtractionFunction : props.keyExtractionFunction,
+            start : props.start,
+            end : props.end
         };
 
         //var rowDataArray = this.state.rowDataArray;
@@ -69,8 +49,8 @@ class TableRow extends Component {
 
     componentWillReceiveProps(nextProps){
         //only update state if row changed
-        if (!this.state.rowDataArray.compare(nextProps.rowDataArray)){
-            this.setState({rowDataArray : nextProps.rowDataArray,});
+        if (!this.state.dataArray.compare(nextProps.dataArray)){
+            this.setState({dataArray : nextProps.dataArray,});
         }
     }
 
@@ -79,10 +59,15 @@ class TableRow extends Component {
         var classExtractionFunction = this.state.classExtractionFunction;
         var keyExtractionFunction = this.state.keyExtractionFunction;
 
-        var rowDataArray = this.state.rowDataArray;
+        var start = this.state.start;
+        var end = this.state.end;
 
-        var rowDataList = rowDataArray.map(function(item, index){
-            return <TableItem key={`${keyExtractionFunction(item)}`} data={item} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction}/>;
+        var dataArray = this.state.dataArray;
+
+        //console.log(`Rendering subarray: ${JSON.stringify(dataArray.slice(start, end))}`);
+
+        var rowDataList = dataArray.slice(start, end).map(function(item, index){
+            return <TableItem key={`${keyExtractionFunction(item)}`} dataArray={dataArray} itemIndex={start + index} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction}/>;
         });
 
         return <tr>{rowDataList}</tr>
@@ -141,36 +126,31 @@ export class TableRenderer extends Component {
             return <b>{noItemsFoundMessage}</b>
         }
 
-        console.log(`numItemRenders for table ${tableName} ${numItemRenders}`);
-        numItemRenders = 0;
+        //console.log(`numItemRenders for table ${tableName} ${numItemRenders}`);
+        //numItemRenders = 0;
 
         //console.log(`dataArray tableName=${tableName} ${JSON.stringify(dataArray)} ${dataArray.length}`);
 
         var rowArray = [];
         var n = 0;
         for (; (n+1)*rowWidth < dataArray.length; ++n){
-            rowArray.push(dataArray.slice((n)*rowWidth,(n+1)*rowWidth));
+            rowArray.push((<TableRow key={`${n*rowWidth} ${(n)*rowWidth + rowWidth}`} dataArray={dataArray} start={n*rowWidth} end={n*rowWidth+rowWidth} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction}/>));
         }
-        rowArray.push(dataArray.slice(n*rowWidth, dataArray.length));
-
-        var rowHTMLList = rowArray.map(function(rowData, index){
-            //console.log(`rowData tableName=${tableName} ${JSON.stringify(rowData)} ${rowData.length}`);
-            return <TableRow key={`${JSON.stringify(rowData)}`} rowDataArray={rowData} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction}/>;
-        });
+        rowArray.push((<TableRow key={`${n*rowWidth} ${dataArray.length}`} dataArray={dataArray} start={n*rowWidth} end={dataArray.length} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction}/>));
 
         if (columnHeaderNames){
             var headerHTML = [];
-            columnHeaderNames.forEach(function(item){
-                headerHTML.push((<th>{item}</th>));
+            columnHeaderNames.forEach(function(item, index){
+                headerHTML.push((<th key={index}>{item}</th>));
             });
 
-            rowHTMLList.unshift((<tr>{headerHTML}</tr>));
+            rowArray.unshift((<tr key="Headers">{headerHTML}</tr>));
         }
 
         return (
             <table>
                 <tbody>
-                    {rowHTMLList}
+                    {rowArray}
                 </tbody>
             </table>
         );
