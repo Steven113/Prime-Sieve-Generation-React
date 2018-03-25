@@ -62,7 +62,8 @@ export class TableRenderer extends Component {
             rowWidth : props.rowWidth,
             valueExtractionFunction : props.valueExtractionFunction,
             classExtractionFunction : props.classExtractionFunction,
-            tableName : props.tableName
+            tableName : props.tableName,
+            noItemsFoundMessage : props.noItemsFoundMessage
         };
     }
 
@@ -78,11 +79,18 @@ export class TableRenderer extends Component {
 
     render() {
 
+
+
         var dataArray = this.state.dataArray;
         var rowWidth = this.state.rowWidth;
         var valueExtractionFunction = this.state.valueExtractionFunction;
         var classExtractionFunction = this.state.classExtractionFunction;
         var tableName = this.state.tableName;
+        var noItemsFoundMessage = this.state.noItemsFoundMessage;
+
+        if (dataArray.length === 0){
+            return <b>{noItemsFoundMessage}</b>
+        }
 
         //console.log(`dataArray tableName=${tableName} ${JSON.stringify(dataArray)} ${dataArray.length}`);
 

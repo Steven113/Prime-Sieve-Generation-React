@@ -17,20 +17,69 @@ class PrimeUserOptions extends Component {
         this.decreaseTimerInterval = props.decreaseTimerInterval;
         this.resetTimerInterval = props.resetTimerInterval;
         this.getTimerInterval = props.getTimerInterval;
+
+
+        this.increasePrimeTableLength = props.increasePrimeTableLength;
+        this.decreasePrimeTableLength = props.decreasePrimeTableLength;
+        this.resetPrimeGenerator = props.resetPrimeGenerator;
+        this.setPrimeTableLength = props.setPrimeTableLength;
+
+        this.onPrimeTableLengthChanged = this.onPrimeTableLengthChanged.bind(this);
+
+        this.state = {
+            primeTableLength : props.primeTableLength,
+            timerInterval : props.timerInterval
+        };
     }
 
+    onPrimeTableLengthChanged(e){
+        e.preventDefault();
 
+        console.log(document.getElementById('numPrimes'));
+        var numPrimes = document.getElementById('numPrimes').value;
+        this.setPrimeTableLength(numPrimes);
+    }
+
+    componentWillReceiveProps(nextProps){
+        if (nextProps.primeTableLength !== this.state.primeTableLength){
+            this.setState({
+                primeTableLength : nextProps.primeTableLength
+            });
+        }
+
+        this.setState({
+            timerInterval : nextProps.timerInterval
+        });
+    }
 
     render(){
 
         return (
             <div className="optionsSection">
-                <div className="primeGenerationSpeedTextBoxStyle">
-                    {this.getTimerInterval()}
+                <div className="primeGenerationSpeedTextBox">
+                    {this.state.timerInterval/1000}s
                 </div>
-                <button type="button" className="increasePrimeGeneratorSpeedButtonStyle" onClick={this.increaseTimerInterval}>Increase generator speed</button>
-                <button type="button" className="decreasePrimeGeneratorSpeedButtonStyle" onClick={this.decreaseTimerInterval}>Decrease generator speed</button>
-                <button type="button" className="resetPrimeGeneratorSpeedButtonStyle" onClick={this.resetTimerInterval}>Reset generator speed</button>
+                {/*Controlling generator speed*/}
+                <button type="button" className="increasePrimeGeneratorSpeedButton" onClick={this.increaseTimerInterval}>Increase generator speed</button>
+                <button type="button" className="decreasePrimeGeneratorSpeedButton" onClick={this.decreaseTimerInterval}>Decrease generator speed</button>
+                <button type="button" className="resetPrimeGeneratorSpeedButton" onClick={this.resetTimerInterval}>Reset generator speed</button>
+
+                <div className="primeGenerationLengthTextBox">
+                    {this.state.primeTableLength}
+                </div>
+
+                {/*Controlling generator size*/}
+                <button type="button" className="increasePrimeGeneratorLengthButton" onClick={this.increasePrimeTableLength}>Increase generator length</button>
+                <button type="button" className="decreasePrimeGeneratorLengthButton" onClick={this.decreasePrimeTableLength}>Decrease generator length</button>
+                <button type="button" className="resetPrimeGeneratorLengthButton" onClick={this.resetPrimeGenerator}>Reset prime generator</button>
+
+                <div className="primeGenerationLengthPromptBox">
+                    {"Enter a new max value to calculate to:"}
+                </div>
+                <form onSubmit={this.onPrimeTableLengthChanged} className="primeGeneratorTextInputForm">
+                  <input type="text" name="numPrimes" id="numPrimes" className="primeGenerationLengthInputBox" /><br/>
+                  <input type="submit" value="Submit" className="primeGenerationLengthInputBoxSubmitButton"/>
+                </form>
             </div>
         );
     }
@@ -60,16 +109,73 @@ class PrimeGenerator extends Component {
         this.resetTimerInterval = this.resetTimerInterval.bind(this);
         this.getTimerInterval = this.getTimerInterval.bind(this);
 
-        var maxInt = this.state.maxInt;
+        this.increasePrimeTableLength = this.increasePrimeTableLength.bind(this);
+        this.decreasePrimeTableLength = this.decreasePrimeTableLength.bind(this);
+        this.resetPrimeGenerator = this.resetPrimeGenerator.bind(this);
 
-        var dataArray = this.state.dataArray;
-
-        for (let i = 2; i<=maxInt; ++i){
-            dataArray.push(new IntMarker(i));
-        }
+        this.getPrimeTableLength = this.getPrimeTableLength.bind(this);
+        this.setPrimeTableLength = this.setPrimeTableLength.bind(this);
 
         this.updatePrimeTable = this.updatePrimeTable.bind(this);
 
+    }
+
+    generatePrimeTable(){
+        var maxInt = this.state.maxInt;
+
+        var dataArrayUpdated = [];
+
+        for (let i = 2; i<=maxInt; ++i){
+            dataArrayUpdated.push(new IntMarker(i));
+        }
+
+        this.setState({
+            dataArray : dataArrayUpdated,
+            primes : []
+        });
+    }
+
+    increasePrimeTableLength(e){
+        e.preventDefault();
+
+        this.setState({maxInt : this.state.maxInt + 1});
+
+        this.generatePrimeTable();
+    }
+
+    decreasePrimeTableLength(e){
+        e.preventDefault();
+
+        if (this.state.dataArray.length > 1){
+            this.setState({maxInt : this.state.maxInt - 1});
+
+            this.generatePrimeTable();
+        }
+    }
+
+    resetPrimeGenerator(){
+        this.generatePrimeTable();
+    }
+
+    setPrimeTableLength(length) {
+        var newPrimeArrayLength = parseInt(length, 10);
+
+        console.log(newPrimeArrayLength);
+
+        if (Number.isInteger(newPrimeArrayLength) && newPrimeArrayLength>0){
+            this.setState({maxInt : newPrimeArrayLength}, this.generatePrimeTable);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    getPrimeTableLength(){
+        if (this.state.dataArray.length === 0) {
+            return 0;
+        }
+        return this.state.dataArray.length + this.state.dataArray[0].value - 1;
     }
 
     changeTimeInterval(delta){
@@ -137,6 +243,7 @@ class PrimeGenerator extends Component {
 
     componentDidMount() {
         this.setPrimeTimer(this.state.timerInterval);
+        this.generatePrimeTable();
     }
 
     componentWillUnmount() {
@@ -161,11 +268,11 @@ class PrimeGenerator extends Component {
                 <Clock/>
                 <div className="user-options">
 
-                <PrimeUserOptions increaseTimerInterval={this.increaseTimerInterval} decreaseTimerInterval={this.decreaseTimerInterval} changeTimeInterval={this.changeTimeInterval} resetTimerInterval={this.resetTimerInterval} getTimerInterval={this.getTimerInterval}/>
+                <PrimeUserOptions increaseTimerInterval={this.increaseTimerInterval} decreaseTimerInterval={this.decreaseTimerInterval} changeTimeInterval={this.changeTimeInterval} resetTimerInterval={this.resetTimerInterval} timerInterval={this.getTimerInterval()} primeTableLength={this.getPrimeTableLength()} increasePrimeTableLength={this.increasePrimeTableLength} decreasePrimeTableLength={this.decreasePrimeTableLength} resetPrimeGenerator={this.resetPrimeGenerator} setPrimeTableLength={this.setPrimeTableLength}/>
                  </div>
-                <TableRenderer dataArray={dataArray} tableName={visualizationTableName} rowWidth={rowWidth} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction}/>
+                <TableRenderer dataArray={dataArray} tableName={visualizationTableName} rowWidth={rowWidth} noItemsFoundMessage={"No values"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction}/>
                 <h2> Primes found </h2>
-                <TableRenderer dataArray={primes} rowWidth={rowWidth} tableName={primeTableName} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction}/>
+                <TableRenderer dataArray={primes} rowWidth={rowWidth} tableName={primeTableName} noItemsFoundMessage={"No primes found"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction}/>
             </div>
         );
     }
@@ -177,7 +284,7 @@ class App extends Component {
     constructor(props){
         super(props);
 
-        this.end = 1000;
+        this.end = 12;
     }
 
 
@@ -193,7 +300,7 @@ class App extends Component {
     return (
         <div>
 
-            <PrimeGenerator rowWidth={10} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} maxInt={this.end}/>
+            <PrimeGenerator rowWidth={15} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} maxInt={this.end}/>
         </div>
     );
   }

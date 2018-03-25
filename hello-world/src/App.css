@@ -1,10 +1,10 @@
 .optionsSection {
-    width : 400px;
+    width : 480px;
     height : 160px;
     position : relative
 }
 
-.primeGenerationSpeedTextBoxStyle {
+.primeGenerationSpeedTextBox {
     text-align: center;
     vertical-align: middle;
     position: absolute;
@@ -15,7 +15,7 @@
     border: 1px solid #000000
 }
 
-.increasePrimeGeneratorSpeedButtonStyle {
+.increasePrimeGeneratorSpeedButton {
     position: absolute;
     top: 40px;
     left: 0px;
@@ -24,7 +24,7 @@
     border: 1px solid #000000
 }
 
-.decreasePrimeGeneratorSpeedButtonStyle {
+.decreasePrimeGeneratorSpeedButton {
     position: absolute;
     top: 80px;
     left: 0px;
@@ -33,12 +33,92 @@
     border: 1px solid #000000
 }
 
-.resetPrimeGeneratorSpeedButtonStyle {
+.resetPrimeGeneratorSpeedButton {
     position: absolute;
     top: 120px;
     left: 0px;
     width : 160px;
     height : 40px;
+    border: 1px solid #000000
+}
+
+.primeGenerationLengthTextBox {
+    text-align: center;
+    vertical-align: middle;
+    position: absolute;
+    top: 0px;
+    left: 160px;
+    width : 158px;
+    height : 40px;
+    border: 1px solid #000000
+}
+
+.primeGenerationLengthPromptBox {
+    text-align: center;
+    vertical-align: middle;
+    position: absolute;
+    top: 0px;
+    left: 320px;
+    width : 158px;
+    height : 40px;
+    border: 1px solid #000000
+}
+
+.primeGenerationLengthInputBox {
+    text-align: center;
+    vertical-align: middle;
+    position: absolute;
+    top: 40px;
+    left: 0px;
+    width : 158px;
+    height : 40px;
+    border: 1px solid #000000
+}
+
+.primeGenerationLengthInputBoxSubmitButton {
+    text-align: center;
+    vertical-align: middle;
+    position: absolute;
+    top: 80px;
+    left: 0px;
+    width : 158px;
+    height : 40px;
+    border: 1px solid #000000
+}
+
+.increasePrimeGeneratorLengthButton {
+    position: absolute;
+    top: 40px;
+    left: 160px;
+    width : 160px;
+    height : 40px;
+    border: 1px solid #000000
+}
+
+.decreasePrimeGeneratorLengthButton {
+    position: absolute;
+    top: 80px;
+    left: 160px;
+    width : 160px;
+    height : 40px;
+    border: 1px solid #000000
+}
+
+.resetPrimeGeneratorLengthButton {
+    position: absolute;
+    top: 120px;
+    left: 160px;
+    width : 160px;
+    height : 40px;
+    border: 1px solid #000000
+}
+
+.primeGeneratorTextInputForm {
+    position: absolute;
+    top: 0px;
+    left: 320px;
+    width : 160px;
+    height : 120px;
     border: 1px solid #000000
 }
 
