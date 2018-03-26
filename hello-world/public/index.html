@@ -30,6 +30,16 @@
 
         console.log("ArrayUtils loaded");
 
+        Array.prototype.deepCopy = function(){
+            return this.map(function(item){
+                var copiedItem = {};
+                Object.keys(item).forEach(function(key){
+                    copiedItem[key] = item[key];
+                });
+                return copiedItem;
+            });
+        }
+
     </script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.

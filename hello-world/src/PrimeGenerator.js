@@ -196,7 +196,7 @@ export class PrimeGenerator extends Component {
         //console.log(`primes ${JSON.stringify(primes)} ${primes.length}`);
 
         return (
-            <primeGenerator>
+            <div className="primeGenerator">
 
                 <div className="primeGeneratorHeading">
                     <h1> Prime Generator</h1>
@@ -209,13 +209,13 @@ export class PrimeGenerator extends Component {
                  </div>
 
                 <section>
-                    <tableSection>
+                    <div className="tableSection">
                         <TableRenderer dataArray={dataArray} tableName={visualizationTableName} key={visualizationTableName} rowWidth={rowWidth} noItemsFoundMessage={"No values"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction} tableClassName={"center"}/>
                         <h2> Primes found </h2>
                         <TableRenderer dataArray={primes} rowWidth={rowWidth} tableName={primeTableName} key={primeTableName} noItemsFoundMessage={"No primes found"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction} tableClassName={"center"}/>
-                    </tableSection>
+                    </div>
                 </section>
-            </primeGenerator>
+            </div>
         );
     }
 
