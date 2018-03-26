@@ -40,6 +40,7 @@ section {
 
 .primeGenerationSpeedTextBox {
     position: absolute;
+    vertical-align:middle;
     top: 0%;
     left: 0%;
     width : 33%;
@@ -49,6 +50,7 @@ section {
 
 .increasePrimeGeneratorSpeedButton {
     position: absolute;
+    vertical-align:middle;
     top: 25%;
     left: 0%;
     width : 33%;
@@ -58,6 +60,7 @@ section {
 
 .decreasePrimeGeneratorSpeedButton {
     position: absolute;
+    vertical-align:middle;
     top: 50%;
     left: 0%;
     width : 33%;
@@ -67,6 +70,7 @@ section {
 
 .resetPrimeGeneratorSpeedButton {
     position: absolute;
+    vertical-align:middle;
     top: 75%;
     left: 0%;
     width : 33%;
@@ -76,6 +80,7 @@ section {
 
 .primeGenerationLengthTextBox {
     position: absolute;
+    vertical-align:middle;
     top: 0%;
     left: 33%;
     width : 33%;
@@ -94,11 +99,12 @@ section {
 
 .primeGenerationLengthInputBox {
     text-align: center;
+
     vertical-align: middle;
     position: absolute;
     top: 50%;
     left: 0%;
-    width : 100%;
+    width : 99%;
     height : 25%;
     border: 1px solid #000000
 }
@@ -116,6 +122,7 @@ section {
 
 .increasePrimeGeneratorLengthButton {
     position: absolute;
+    vertical-align:middle;
     top: 25%;
     left: 33%;
     width : 33%;
@@ -125,6 +132,7 @@ section {
 
 .decreasePrimeGeneratorLengthButton {
     position: absolute;
+    vertical-align:middle;
     top: 50%;
     left: 33%;
     width : 33%;
@@ -134,6 +142,7 @@ section {
 
 .resetPrimeGeneratorLengthButton {
     position: absolute;
+    vertical-align:middle;
     top: 75%;
     left: 33%;
     width : 33%;
