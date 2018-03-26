@@ -39,10 +39,10 @@ class TableRow extends Component {
             keyExtractionFunction : props.keyExtractionFunction,
             start : props.start,
             end : props.end,
-            keyArray : props.keyArray.slice()
+            rowKey : props.rowKey
         };
 
-        //console.log(this.state.keyArray);
+        //console.log(this.state.rowKeyArray);
 
         //console.log(`rowDataArray ${JSON.stringify(rowDataArray)} ${rowDataArray.length}`);
 
@@ -50,21 +50,19 @@ class TableRow extends Component {
 
     componentWillReceiveProps(nextProps){
         //only update state if row changed
-        if (!this.state.keyArray.compare(nextProps.keyArray)){
+        if (!this.state.rowKey !== (nextProps.rowKey)){
             //console.log("initialArrayKeys "+initialArrayKeys);
             //console.log("newArrayKeys "+newArrayKeys);
             this.setState({
                 dataArray : nextProps.dataArray,
-                keyArray : nextProps.keyArray.slice()
+                rowKey : nextProps.rowKey
             });
         }
     }
 
     shouldComponentUpdate(nextProps, nextState){
-        var oldRowKeys = this.state.keyArray.slice(this.state.start, this.state.end);
-        var newRowKeys = nextProps.keyArray.slice(this.state.start, this.state.end);
 
-        if (oldRowKeys.compare(newRowKeys)){
+        if (this.state.rowKey === nextProps.rowKey){
 
             return false;
         } else {
@@ -100,10 +98,12 @@ export class TableRenderer extends Component {
 
         //console.log(`props.dataArray tableName=${props.tableName} ${JSON.stringify(props.dataArray)} ${props.dataArray.length}`);
 
+
+
         this.state = {
             dataArray : props.dataArray,
+            rowKeys : this.generateRowKeys(props.dataArray, props.rowWidth),
             rowWidth : props.rowWidth,
-            keyArray : props.dataArray.map((item)=>{return props.keyExtractionFunction(item)}),
             valueExtractionFunction : props.valueExtractionFunction,
             classExtractionFunction : props.classExtractionFunction,
             keyExtractionFunction : props.keyExtractionFunction,
@@ -112,19 +112,34 @@ export class TableRenderer extends Component {
             columnHeaderNames : props.columnHeaderNames,
             tableClassName : props.tableClassName
         };
+
+
+    }
+
+    generateRowKeys(dataArray, rowWidth){
+        var rowKeys = [];
+
+        var n = 0;
+
+        for (; n<dataArray.length; n+=rowWidth){
+            var rowArray = dataArray.slice(n, Math.min(n + rowWidth, dataArray.length));
+
+            rowKeys.push(sha256((rowArray)));
+        }
+
+        return rowKeys;
     }
 
     componentWillReceiveProps(nextProps){
-        console.log(`Updating table: ${this.state.tableName}`);
-        //console.log("Current array "+JSON.stringify(this.state.dataArray));
-        //console.log("Next array "+JSON.stringify(nextProps.dataArray));
+        if (nextProps.dataArray){
+            console.log(`Updating table: ${this.state.tableName}`);
 
-        //if (!this.state.dataArray.compare(nextProps.dataArray)){
             this.setState({
                 dataArray : nextProps.dataArray,
-                keyArray : nextProps.dataArray.map((item)=>{return nextProps.keyExtractionFunction(item)}),
+                rowKeys : this.generateRowKeys(nextProps.dataArray, nextProps.rowWidth)
             });
         //}
+        }
     }
 
 
@@ -136,6 +151,7 @@ export class TableRenderer extends Component {
     render() {
 
         var dataArray = this.state.dataArray;
+        var rowKeys = this.state.rowKeys;
         var rowWidth = this.state.rowWidth;
         var valueExtractionFunction = this.state.valueExtractionFunction;
         var classExtractionFunction = this.state.classExtractionFunction;
@@ -146,7 +162,7 @@ export class TableRenderer extends Component {
 
         var tableClassName = this.state.tableClassName;
 
-        var keyArray = this.state.keyArray;
+        var rowKeyArray = this.state.rowKeyArray;
 
         if (dataArray.length === 0){
             return <b>{noItemsFoundMessage}</b>
@@ -157,12 +173,14 @@ export class TableRenderer extends Component {
 
         //console.log(`dataArray tableName=${tableName} ${JSON.stringify(dataArray)} ${dataArray.length}`);
 
+        //console.log(`keys = ${JSON.stringify(rowKeys)}`);
+
         var rowArray = [];
         var n = 0;
         for (; (n+1)*rowWidth < dataArray.length; ++n){
-            rowArray.push((<TableRow key={`${n*rowWidth} ${(n)*rowWidth + rowWidth}`} dataArray={dataArray} start={n*rowWidth} end={n*rowWidth+rowWidth} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction} keyArray={keyArray}/>));
+            rowArray.push((<TableRow key={`${n*rowWidth} ${(n)*rowWidth + rowWidth}`} dataArray={dataArray} start={n*rowWidth} end={n*rowWidth+rowWidth} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction} rowKeyArray={rowKeyArray} rowKey={rowKeys[n]}/>));
         }
-        rowArray.push((<TableRow key={`${n*rowWidth} ${dataArray.length}`} dataArray={dataArray} start={n*rowWidth} end={dataArray.length} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction} keyArray={keyArray}/>));
+        rowArray.push((<TableRow key={`${n*rowWidth} ${dataArray.length}`} dataArray={dataArray} start={n*rowWidth} end={dataArray.length} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction} rowKeyArray={rowKeyArray} rowKey={rowKeys[n]}/>));
 
         if (columnHeaderNames){
             var headerHTML = [];
