@@ -54,8 +54,8 @@ export class PrimeUserOptions extends Component {
                     <div className="textInfo">{this.state.timerInterval/1000}s</div>
                 </div>
                 {/*Controlling generator speed*/}
-                <button type="button" className="increasePrimeGeneratorSpeedButton" onClick={this.increaseTimerInterval}>Increase generator speed</button>
-                <button type="button" className="decreasePrimeGeneratorSpeedButton" onClick={this.decreaseTimerInterval}>Decrease generator speed</button>
+                <button type="button" className="increasePrimeGeneratorSpeedButton" onClick={this.decreaseTimerInterval}>Increase generator speed</button>
+                <button type="button" className="decreasePrimeGeneratorSpeedButton" onClick={this.increaseTimerInterval}>Decrease generator speed</button>
                 <button type="button" className="resetPrimeGeneratorSpeedButton" onClick={this.resetTimerInterval}>Reset generator speed</button>
 
                 <div className="primeGenerationLengthTextBox">
