@@ -1,20 +1,20 @@
 run:
-	cd hello-world
+	cd prime-generator
 	npm start
 
 gadd:
 	git add *
 
 build:
-	cd hello-world
+	cd prime-generator
 	npm run build
 
 deploy:
-	cd hello-world
+	cd prime-generator
 	npm run deploy
 
 PushToRepo:
 	git push -u origin master
 
 PullMasterFromRepo:
-	git pull https://github.com/Steven113/Prime-Sieve-Visualization-React.git master
+	git pull https://github.com/Steven113/Prime-Sieve-Generation-React.git master
