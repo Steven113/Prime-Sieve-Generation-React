@@ -2,7 +2,7 @@
 
 This code provides the basis of a visualisation of the (basic) Sieve of Eratosthenes algorithm.
 
-The current version of the visualization is deployed to https://steven113.github.io/Prime-Sieve-Visualization-React/
+The current version of the visualization is deployed to https://steven113.github.io/Prime-Sieve-Generation-React/
 
 Disclaimer: My CSS skills are not amazing
 
