@@ -219,9 +219,14 @@ export class PrimeGenerator extends Component {
 
                 <section>
                     <div className="tableSection">
-                        <FlexRow key={sha256ForDataArray} dataArray={dataArray} noItemsFoundMessage={"No values"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction}/>
-                        <h2> Primes found </h2>
-                        <FlexRow key={sha256ForPrimeArray} dataArray={primes} noItemsFoundMessage={"No primes found"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction}/>
+                        <div className="primesFoundSection">
+                            <h2 className="offsetHeader"> Primes found </h2>
+                            <FlexRow key={sha256ForPrimeArray} dataArray={primes} noItemsFoundMessage={"No primes found"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction}/>
+                        </div>
+                        <div className="primeGenerationVisualisationSection">
+                            <h2 className="offsetHeader"> Visualization of Prime Search </h2>
+                            <FlexRow key={sha256ForDataArray} dataArray={dataArray} noItemsFoundMessage={"No values"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction}/>
+                        </div>
                     </div>
                 </section>
             </div>

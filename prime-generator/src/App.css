@@ -188,8 +188,36 @@ ul.unorderedListNoBulletPoint {
   padding: 10px;
 }
 
+.grid-container-auto-fill-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    grid-auto-rows: 20px;
+    grid-gap: 5px;
+}
+
 .grid-item {
   border: 1px solid rgba(0, 0, 0, 0.8);
   font-size: 16px;
   text-align: center;
+}
+
+div.primesFoundSection {
+    position: relative;
+    width: 45%;
+    top: 0%;
+    padding: 5px;
+    float: left;
+}
+
+div.primeGenerationVisualisationSection {
+    position: relative;
+    width: 45%;
+    top: 0%;
+    padding: 5px;
+    float: left;
+}
+
+h2.offsetHeader {
+    position: relative;
+    height: 50px;
 }

@@ -95,6 +95,6 @@ export class FlexRow extends Component {
             return <FlexItem key={`${keyExtractionFunction(item)}`} dataArray={dataArray} itemIndex={index} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction}/>;
         });
 
-        return <div className="grid-container-10-items">{rowDataList}</div>
+        return <div className="grid-container-auto-fill-row">{rowDataList}</div>
     }
 }
