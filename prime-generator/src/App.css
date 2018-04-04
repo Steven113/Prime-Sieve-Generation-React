@@ -3,9 +3,9 @@
 }
 
 .textInfo {
+    width: 100%;
     text-align: center;
     vertical-align: middle;
-    line-height: 40px;
 }
 
 body {
@@ -32,133 +32,74 @@ section {
 
 .optionsSection {
     width : 100%;
-    height : 160px;
     position : relative;
     border: 1px solid #000000;
 
 }
 
 .primeGenerationSpeedTextBox {
-    position: absolute;
-    vertical-align:middle;
-    top: 0%;
-    left: 0%;
-    width : 33%;
-    height : 25%;
+    width: 25%;
+    text-align: center;
     border: 1px solid #000000;
 }
 
 .increasePrimeGeneratorSpeedButton {
-    position: absolute;
-    vertical-align:middle;
-    top: 25%;
-    left: 0%;
-    width : 33%;
-    height : 25%;
+    text-align: center;
     border: 1px solid #000000
 }
 
 .decreasePrimeGeneratorSpeedButton {
-    position: absolute;
-    vertical-align:middle;
-    top: 50%;
-    left: 0%;
-    width : 33%;
-    height : 25%;
+    text-align: center;
     border: 1px solid #000000
 }
 
 .resetPrimeGeneratorSpeedButton {
-    position: absolute;
-    vertical-align:middle;
-    top: 75%;
-    left: 0%;
-    width : 33%;
-    height : 25%;
+    text-align: center;
     border: 1px solid #000000
 }
 
 .primeGenerationLengthTextBox {
-    position: absolute;
-    vertical-align:middle;
-    top: 0%;
-    left: 33%;
-    width : 33%;
-    height : 25%;
+    text-align: center;
     border: 1px solid #000000;
 }
 
 .primeGenerationLengthPromptBox {
-    position: absolute;
-    top: 0%;
-    left: 66%;
-    width : 34%;
-    height : 50%;
+    text-align: center;
     border: 1px solid #000000;
 }
 
 .primeGenerationLengthInputBox {
     text-align: center;
-
-    vertical-align: middle;
-    position: absolute;
-    top: 50%;
-    left: 0%;
-    width : 99%;
-    height : 25%;
     border: 1px solid #000000
 }
 
 .primeGenerationLengthInputBoxSubmitButton {
     text-align: center;
-    vertical-align: middle;
-    position: absolute;
-    top: 75%;
-    left: 0%;
-    width : 100%;
-    height : 25%;
     border: 1px solid #000000
 }
 
 .increasePrimeGeneratorLengthButton {
-    position: absolute;
-    vertical-align:middle;
-    top: 25%;
-    left: 33%;
-    width : 33%;
-    height : 25%;
+    text-align: center;
     border: 1px solid #000000
 }
 
 .decreasePrimeGeneratorLengthButton {
-    position: absolute;
-    vertical-align:middle;
-    top: 50%;
-    left: 33%;
-    width : 33%;
-    height : 25%;
+    text-align: center;
     border: 1px solid #000000
 }
 
 .resetPrimeGeneratorLengthButton {
-    position: absolute;
-    vertical-align:middle;
-    top: 75%;
-    left: 33%;
-    width : 33%;
-    height : 25%;
+    text-align: center;
     border: 1px solid #000000
 }
 
 .primeGeneratorTextInputForm {
-    position: absolute;
-    top: 0%;
-    left: 66%;
-    width : 34%;
+    width : 100%;
     height : 100%;
+    text-align: center;
 }
 
-table {
+table.numberTable {
     border: 5px solid black;
 }
 
@@ -206,4 +147,17 @@ td.Is-Prime {
 table.center {
     margin-left:auto;
     margin-right:auto;
+}
+
+td.tableElementButton {
+    height: 100%;
+}
+
+/*tableButton {
+    width: 100%;
+    height: 100%;
+}*/
+
+ul.unorderedListNoBulletPoint {
+    list-style-type:none;
 }

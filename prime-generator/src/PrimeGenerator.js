@@ -210,9 +210,9 @@ export class PrimeGenerator extends Component {
 
                 <section>
                     <div className="tableSection">
-                        <TableRenderer dataArray={dataArray} tableName={visualizationTableName} key={visualizationTableName} rowWidth={rowWidth} noItemsFoundMessage={"No values"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction} tableClassName={"center"}/>
+                        <TableRenderer dataArray={dataArray} tableName={visualizationTableName} key={visualizationTableName} rowWidth={rowWidth} noItemsFoundMessage={"No values"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction} tableClassName={"numberTable center"}/>
                         <h2> Primes found </h2>
-                        <TableRenderer dataArray={primes} rowWidth={rowWidth} tableName={primeTableName} key={primeTableName} noItemsFoundMessage={"No primes found"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction} tableClassName={"center"}/>
+                        <TableRenderer dataArray={primes} rowWidth={rowWidth} tableName={primeTableName} key={primeTableName} noItemsFoundMessage={"No primes found"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction} tableClassName={"numberTable center"}/>
                     </div>
                 </section>
             </div>

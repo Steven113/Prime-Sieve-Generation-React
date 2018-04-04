@@ -50,30 +50,36 @@ export class PrimeUserOptions extends Component {
 
         return (
             <div className="optionsSection">
-                <div className="primeGenerationSpeedTextBox">
-                    <div className="textInfo">{this.state.timerInterval/1000}s</div>
-                </div>
-                {/*Controlling generator speed*/}
-                <button type="button" className="increasePrimeGeneratorSpeedButton" onClick={this.decreaseTimerInterval}>Increase generator speed</button>
-                <button type="button" className="decreasePrimeGeneratorSpeedButton" onClick={this.increaseTimerInterval}>Decrease generator speed</button>
-                <button type="button" className="resetPrimeGeneratorSpeedButton" onClick={this.resetTimerInterval}>Reset generator speed</button>
+                <table>
+                    <tr>
+                        <td className="primeGenerationSpeedTextBox">
+                            <div>{this.state.timerInterval/1000}s</div>
+                        </td>
+                        {/*Controlling generator speed*/}
+                        <td className="tableButton"><button type="button" className="increasePrimeGeneratorSpeedButton tableButton" onClick={this.decreaseTimerInterval}>Increase generator speed</button></td>
+                        <td className="tableButton"><button type="button" className="decreasePrimeGeneratorSpeedButton tableButton" onClick={this.increaseTimerInterval}>Decrease generator speed</button></td>
+                        <td className="tableButton"><button type="button" className="resetPrimeGeneratorSpeedButton tableButton" onClick={this.resetTimerInterval}>Reset generator speed</button></td>
+                    </tr>
 
-                <div className="primeGenerationLengthTextBox">
-                    <div className="textInfo">{this.state.primeTableLength}</div>
-                </div>
+                    <tr>
+                    <td className="primeGenerationLengthTextBox">
+                            <div>{this.state.primeTableLength}</div>
+                    </td>
 
-                {/*Controlling generator size*/}
-                <button type="button" className="increasePrimeGeneratorLengthButton" onClick={this.increasePrimeTableLength}>Increase generator length</button>
-                <button type="button" className="decreasePrimeGeneratorLengthButton" onClick={this.decreasePrimeTableLength}>Decrease generator length</button>
-                <button type="button" className="resetPrimeGeneratorLengthButton" onClick={this.resetPrimeGenerator}>Reset prime generator</button>
 
-                <div className="primeGenerationLengthPromptBox">
+                        {/*Controlling generator size*/}
+                        <td className="tableButton"><button type="button" className="increasePrimeGeneratorLengthButton tableButton" onClick={this.increasePrimeTableLength}>Increase generator length</button></td>
+                        <td className="tableButton"><button type="button" className="decreasePrimeGeneratorLengthButton tableButton" onClick={this.decreasePrimeTableLength}>Decrease generator length</button></td>
+                        <td className="tableButton"><button type="button" className="resetPrimeGeneratorLengthButton tableButton" onClick={this.resetPrimeGenerator}>Reset prime generator</button></td>
+                    </tr>
+                </table>
+                <div className="textInfo center">
                     <div className="textInfo">{"Enter a new max value to calculate to:"}</div>
+                    <form onSubmit={this.onPrimeTableLengthChanged} className="primeGeneratorTextInputForm">
+                      <input type="text" name="numPrimes" id="numPrimes" className="primeGenerationLengthInputBox" /><br/>
+                      <input type="submit" value="Submit" className="primeGenerationLengthInputBoxSubmitButton"/>
+                    </form>
                 </div>
-                <form onSubmit={this.onPrimeTableLengthChanged} className="primeGeneratorTextInputForm">
-                  <input type="text" name="numPrimes" id="numPrimes" className="primeGenerationLengthInputBox" /><br/>
-                  <input type="submit" value="Submit" className="primeGenerationLengthInputBoxSubmitButton"/>
-                </form>
             </div>
         );
     }
