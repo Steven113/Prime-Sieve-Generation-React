@@ -131,15 +131,15 @@ table.numberTable {
   to { transform: rotate(360deg); }
 }
 
-td.Unprocessed-Value {
+.Unprocessed-Value {
     background-color: grey;
 }
 
-td.Not-Prime {
+.Not-Prime {
     background-color: red;
 }
 
-td.Is-Prime {
+.Is-Prime {
     background-color: green;
 }
 
@@ -162,25 +162,33 @@ ul.unorderedListNoBulletPoint {
 }
 
 .flex-flow-row {
-    flex-wrap: wrap;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.flex-equal-sized-row{
+    flex: 1 1 0;
 }
 
 .grid-container-4-items {
   display: grid;
   grid-template-columns: repeat(4, 25%);
-  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-container-10-items {
+  display: grid;
+  grid-template-columns: repeat(10, 10%);
   padding: 10px;
 }
 
 .grid-container-2-items {
   display: grid;
   grid-template-columns: 30% auto;
-  background-color: #2196F3;
   padding: 10px;
 }
 
 .grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(0, 0, 0, 0.8);
   font-size: 16px;
   text-align: center;

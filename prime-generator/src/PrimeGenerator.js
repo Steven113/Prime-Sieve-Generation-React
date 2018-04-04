@@ -5,7 +5,9 @@ import IntMarker from './IntMarker.js';
 
 import {PrimeUserOptions} from './PrimeUserOptions.js';
 
-import {TableRenderer} from './TableGenerator.js';
+import {FlexRow} from './FlexRow.js';
+
+import {sha256} from './SHA256.js';
 
 export class PrimeGenerator extends Component {
     constructor(props){
@@ -22,6 +24,8 @@ export class PrimeGenerator extends Component {
             minTimerInterval : 100,
             timeIntervalDelta : 100
         };
+
+
 
         this.increaseTimerInterval = this.increaseTimerInterval.bind(this);
         this.changeTimeInterval = this.changeTimeInterval.bind(this);
@@ -161,6 +165,8 @@ export class PrimeGenerator extends Component {
         this.primeGeneratorInterval = setInterval (this.updatePrimeTable, interval);
     }
 
+
+
     componentDidMount() {
         this.setPrimeTimer(this.state.timerInterval);
         this.generatePrimeTable();
@@ -190,10 +196,13 @@ export class PrimeGenerator extends Component {
         var keyExtractionFunction = this.keyExtractionFunction;
         var primes = this.state.primes;
 
+        var sha256ForDataArray = sha256(dataArray);
+        var sha256ForPrimeArray = sha256(primes);
+
         var visualizationTableName = "Primes calculation visualization";
         var primeTableName = "Primes found";
 
-        //console.log(`primes ${JSON.stringify(primes)} ${primes.length}`);
+        console.log(`dataArray in prime generator = ${JSON.stringify(dataArray)}`);
 
         return (
             <div className="primeGenerator">
@@ -210,9 +219,9 @@ export class PrimeGenerator extends Component {
 
                 <section>
                     <div className="tableSection">
-                        <TableRenderer dataArray={dataArray} tableName={visualizationTableName} key={visualizationTableName} rowWidth={rowWidth} noItemsFoundMessage={"No values"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction} tableClassName={"numberTable center"}/>
+                        <FlexRow key={sha256ForDataArray} dataArray={dataArray} noItemsFoundMessage={"No values"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction}/>
                         <h2> Primes found </h2>
-                        <TableRenderer dataArray={primes} rowWidth={rowWidth} tableName={primeTableName} key={primeTableName} noItemsFoundMessage={"No primes found"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction} tableClassName={"numberTable center"}/>
+                        <FlexRow key={sha256ForPrimeArray} dataArray={primes} noItemsFoundMessage={"No primes found"} valueExtractionFunction={valueExtractionFunction} classExtractionFunction={classExtractionFunction} keyExtractionFunction={keyExtractionFunction}/>
                     </div>
                 </section>
             </div>

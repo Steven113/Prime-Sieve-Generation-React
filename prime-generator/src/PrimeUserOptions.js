@@ -52,7 +52,7 @@ export class PrimeUserOptions extends Component {
             <div className="optionsSection">
 
                         <div className="grid-container-4-items flex-flow-row">
-                            <div className="grid-item">
+                            <div className="grid-item textInfo">
                                 <div>{this.state.timerInterval/1000}s</div>
                             </div>
                             {/*Controlling generator speed*/}
@@ -62,7 +62,7 @@ export class PrimeUserOptions extends Component {
                         </div>
 
                         <div className="grid-container-4-items flex-flow-row">
-                            <div className="grid-item">
+                            <div className="grid-item textInfo">
                                     <div>{this.state.primeTableLength}</div>
                             </div>
                             {/*Controlling generator size*/}
@@ -72,7 +72,7 @@ export class PrimeUserOptions extends Component {
                         </div>
 
                     <div className="grid-container-2-items flex-flow-row">
-                        <div className="grid-item">{"Enter a new max value to calculate to:"}</div>
+                        <div className="grid-item textInfo">{"Enter a new max value to calculate to:"}</div>
                         <form onSubmit={this.onPrimeTableLengthChanged} className="primeGeneratorTextInputForm grid-item">
                           <input type="text" name="numPrimes" id="numPrimes" className="primeGenerationLengthInputBox" /><br/>
                           <input type="submit" value="Submit" className="primeGenerationLengthInputBoxSubmitButton"/>
