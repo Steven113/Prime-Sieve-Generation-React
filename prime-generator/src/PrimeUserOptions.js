@@ -50,36 +50,34 @@ export class PrimeUserOptions extends Component {
 
         return (
             <div className="optionsSection">
-                <table>
-                    <tr>
-                        <td className="primeGenerationSpeedTextBox">
-                            <div>{this.state.timerInterval/1000}s</div>
-                        </td>
-                        {/*Controlling generator speed*/}
-                        <td className="tableButton"><button type="button" className="increasePrimeGeneratorSpeedButton tableButton" onClick={this.decreaseTimerInterval}>Increase generator speed</button></td>
-                        <td className="tableButton"><button type="button" className="decreasePrimeGeneratorSpeedButton tableButton" onClick={this.increaseTimerInterval}>Decrease generator speed</button></td>
-                        <td className="tableButton"><button type="button" className="resetPrimeGeneratorSpeedButton tableButton" onClick={this.resetTimerInterval}>Reset generator speed</button></td>
-                    </tr>
 
-                    <tr>
-                    <td className="primeGenerationLengthTextBox">
-                            <div>{this.state.primeTableLength}</div>
-                    </td>
+                        <div className="grid-container-4-items flex-flow-row">
+                            <div className="grid-item">
+                                <div>{this.state.timerInterval/1000}s</div>
+                            </div>
+                            {/*Controlling generator speed*/}
+                            <button type="button" className="grid-item" onClick={this.decreaseTimerInterval}>Increase generator speed</button>
+                            <button type="button" className="grid-item" onClick={this.increaseTimerInterval}>Decrease generator speed</button>
+                            <button type="button" className="grid-item" onClick={this.resetTimerInterval}>Reset generator speed</button>
+                        </div>
 
+                        <div className="grid-container-4-items flex-flow-row">
+                            <div className="grid-item">
+                                    <div>{this.state.primeTableLength}</div>
+                            </div>
+                            {/*Controlling generator size*/}
+                            <button type="button" className="grid-item" onClick={this.increasePrimeTableLength}>Increase generator length</button>
+                            <button type="button" className="grid-item" onClick={this.decreasePrimeTableLength}>Decrease generator length</button>
+                            <button type="button" className="grid-item" onClick={this.resetPrimeGenerator}>Reset prime generator</button>
+                        </div>
 
-                        {/*Controlling generator size*/}
-                        <td className="tableButton"><button type="button" className="increasePrimeGeneratorLengthButton tableButton" onClick={this.increasePrimeTableLength}>Increase generator length</button></td>
-                        <td className="tableButton"><button type="button" className="decreasePrimeGeneratorLengthButton tableButton" onClick={this.decreasePrimeTableLength}>Decrease generator length</button></td>
-                        <td className="tableButton"><button type="button" className="resetPrimeGeneratorLengthButton tableButton" onClick={this.resetPrimeGenerator}>Reset prime generator</button></td>
-                    </tr>
-                </table>
-                <div className="textInfo center">
-                    <div className="textInfo">{"Enter a new max value to calculate to:"}</div>
-                    <form onSubmit={this.onPrimeTableLengthChanged} className="primeGeneratorTextInputForm">
-                      <input type="text" name="numPrimes" id="numPrimes" className="primeGenerationLengthInputBox" /><br/>
-                      <input type="submit" value="Submit" className="primeGenerationLengthInputBoxSubmitButton"/>
-                    </form>
-                </div>
+                    <div className="grid-container-2-items flex-flow-row">
+                        <div className="grid-item">{"Enter a new max value to calculate to:"}</div>
+                        <form onSubmit={this.onPrimeTableLengthChanged} className="primeGeneratorTextInputForm grid-item">
+                          <input type="text" name="numPrimes" id="numPrimes" className="primeGenerationLengthInputBox" /><br/>
+                          <input type="submit" value="Submit" className="primeGenerationLengthInputBoxSubmitButton"/>
+                        </form>
+                    </div>
             </div>
         );
     }
